@@ -1,9 +1,10 @@
 import cv2
 import pytesseract
+import re
 import sys
 from imutils import contours
 pytesseract.pytesseract.tesseract_cmd = 'D:\\tesseract\\tesseract.exe'
-image = cv2.imread('./PlatesPic/3.jpg')
+image = cv2.imread('./PlatesPic/5.jpg')
 height, weight, _ = image.shape
 
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
@@ -17,15 +18,16 @@ for i in contour:
     area = cv2.contourArea(i)
     x, y, w, h = cv2.boundingRect(i)
     if area > 500:
-        img = image[y:y+h, x:x+w]
+        img = image[y:y + h, x:x + w]
         result = pytesseract.image_to_string(img, lang="eng+rus")
+        list(result)
         if len(result) > 7:
+            symbol for symbol in result:
+                correct = re.search(r'[а-яА-Яa-zA-z]', symbol)
             print(result)
 
 
-
-
-cv2.imshow("Test", thresh)
+cv2.imshow("Test", image)
 
 
 
