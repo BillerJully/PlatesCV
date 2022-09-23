@@ -1,6 +1,9 @@
-import tkinter as tk
+from tkinter import *
 
 
-window = tk.Tk()
-
-greeting = tk.Label(text="Hello, Tkinter")
+window = Tk()
+window.title("Распознавание номеров")
+window.geometry('600x400')
+btn = Button(window, text="Загрузить файл!")
+btn.grid(column=1, row=0)
+window.mainloop()
