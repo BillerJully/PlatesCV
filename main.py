@@ -5,7 +5,7 @@ import sys
 from imutils import contours
 from tkinter import *
 from tkinter import filedialog
-
+import messagebox
 
 def Plates():
     pytesseract.pytesseract.tesseract_cmd = 'D:\\tesseract\\tesseract.exe'
@@ -26,20 +26,29 @@ def Plates():
             img = image[y:y + h, x:x + w]
             result = pytesseract.image_to_string(img, lang="eng+rus")
             list(result)
+            checkpoint = False
             if len(result) > 7:
-                print(result)
+                for c in result:
+                    if c.isdigit():
+                        checkpoint = True
+            if checkpoint:
+                messagebox.showinfo(title="Найденный номер: ", message="Номер на машине: "+ result)
 
-    cv2.imshow("Test", image)
 
-    cv2.waitKey(0);
+
+
+
+    #cv2.imshow("Test", image)
+
 window = Tk()
 window.title("Распознавание номеров")
 window.geometry('600x400')
+canvas = Canvas(window, height=600, width=400)
+canvas.pack()
+frame = Frame (window, height=600, width=400)
 
 btn = Button(text="Загрузить фото автомобиля", background="#555", foreground="#ccc",
              padx="20", pady="8", font="16", command=Plates)
 btn.place(relx=.5, rely=.5, anchor="c", height=30, width=270, bordermode=OUTSIDE)
-
-
 
 window.mainloop()
