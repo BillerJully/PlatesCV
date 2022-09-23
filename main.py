@@ -36,7 +36,10 @@ window = Tk()
 window.title("Распознавание номеров")
 window.geometry('600x400')
 
+btn = Button(text="Загрузить фото автомобиля", background="#555", foreground="#ccc",
+             padx="20", pady="8", font="16", command=Plates)
+btn.place(relx=.5, rely=.5, anchor="c", height=30, width=270, bordermode=OUTSIDE)
 
-btn = Button(window, text="Загрузить файл!", command=Plates)
-btn.grid(column=1, row=0)
+
+
 window.mainloop()
