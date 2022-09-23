@@ -22,8 +22,7 @@ for i in contour:
         result = pytesseract.image_to_string(img, lang="eng+rus")
         list(result)
         if len(result) > 7:
-            symbol for symbol in result:
-                correct = re.search(r'[а-яА-Яa-zA-z]', symbol)
+
             print(result)
 
 
